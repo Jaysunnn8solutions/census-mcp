@@ -3,12 +3,17 @@ import {
   listVintagesConfig,
   listVintagesHandler,
 } from "../../lib/tools/list-vintages";
+import {
+  resolveGeographyConfig,
+  resolveGeographyHandler,
+} from "../../lib/tools/resolve-geography";
 
 const handler = createMcpHandler((server) => {
+  server.registerTool("list_vintages", listVintagesConfig, listVintagesHandler);
   server.registerTool(
-    "list_vintages",
-    listVintagesConfig,
-    listVintagesHandler
+    "resolve_geography",
+    resolveGeographyConfig,
+    resolveGeographyHandler
   );
 });
 
