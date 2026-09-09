@@ -14,6 +14,11 @@ const TOOLS = [
     name: "search_columns",
     desc: "Finds variable codes by plain-language keyword across roughly 28,000 variables per vintage, ranked by relevance.",
   },
+  {
+    name: "get_data",
+    desc: "Retrieves estimates for chosen variables and geography. Supports wildcards for cross-county comparison, with a row cap and explicit truncation notice.",
+  },
+
 ];
 
 const NOTES = [
@@ -123,15 +128,64 @@ export default function Home() {
       </section>
 
       <section>
-        <p className="eyebrow">Engineering</p>
-        <h2>Design decisions</h2>
-        <ul className="notes">
-          {NOTES.map((n) => (
-            <li key={n.title}>
-              <strong>{n.title}.</strong> {n.body}
-            </li>
-          ))}
-        </ul>
+        <p className="eyebrow">Example</p>
+        <h2>One question, three tools</h2>
+        <p>
+          Recorded from a live session with Claude connected to this server.
+          The server exposes primitives, not answers — Claude decides how to
+          combine them, resolving the place, finding the right variable among
+          27,000, then fetching the estimate. Connect it above to run queries
+          like this yourself.
+        </p>
+
+        <div className="transcript">
+          <div className="turn-user">
+            What&apos;s the median household income in Fulton County, Georgia?
+          </div>
+
+          <div className="call">
+            <div className="call-name">
+              resolve_geography{" "}
+              <span>{`{ query: "Fulton County", state: "Georgia" }`}</span>
+            </div>
+            <pre className="call-out">{`Found 1 match(es) (defaulted to 2024, the most recent acs5 vintage):
+Fulton County, Georgia — level: county, state FIPS: 13, county FIPS: 121`}</pre>
+          </div>
+
+          <div className="call">
+            <div className="call-name">
+              search_columns{" "}
+              <span>{`{ query: "median household income", limit: 5 }`}</span>
+            </div>
+            <pre className="call-out">{`5 match(es) for "median household income", searched 27149 variables:
+
+B19013_001E — Median Household Income in the Past 12 Months
+    Estimate > Median household income in the past 12 months
+B19013A_001E — ... (White Alone Householder)
+B19013B_001E — ... (Black or African American Alone Householder)
+B19013C_001E — ... (American Indian and Alaska Native Alone Householder)
+B19013D_001E — ... (Asian Alone Householder)`}</pre>
+          </div>
+
+          <div className="call">
+            <div className="call-name">
+              get_data{" "}
+              <span>{`{ variables: ["B19013_001E"], state: "13", county: "121" }`}</span>
+            </div>
+            <pre className="call-out">{`ACS acs5 2024, 1 row(s).
+
+NAME                    B19013_001E  state  county
+----------------------  -----------  -----  ------
+Fulton County, Georgia  95292        13     121`}</pre>
+          </div>
+
+          <div className="turn-answer">
+            The median household income in Fulton County, Georgia is{" "}
+            <strong>$95,292</strong>. Source: American Community Survey 5-year
+            estimates, 2024 vintage (variable B19013_001E, in 2024
+            inflation-adjusted dollars).
+          </div>
+        </div>
       </section>
 
       <footer>

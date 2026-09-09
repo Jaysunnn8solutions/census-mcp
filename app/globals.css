@@ -289,3 +289,82 @@ a {
 footer a {
   color: #e8ecf5;
 }
+
+/* ---- Transcript -------------------------------------------------------- */
+
+.transcript {
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 1.5rem;
+  font-size: 0.88rem;
+}
+
+.turn-user {
+  background: var(--paper-alt);
+  padding: 0.9rem 1.1rem;
+  border-bottom: 1px solid var(--rule-light);
+  font-weight: 500;
+}
+
+.turn-user::before {
+  content: "You";
+  display: block;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 0.35rem;
+  font-weight: 700;
+}
+
+.call {
+  padding: 0.9rem 1.1rem;
+  border-bottom: 1px solid var(--rule-light);
+}
+
+.call-name {
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  color: var(--navy);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.call-name span {
+  color: var(--ink-muted);
+  font-weight: 400;
+}
+
+.call-out {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  white-space: pre;
+  overflow-x: auto;
+  color: var(--ink-muted);
+  background: var(--paper-alt);
+  border-left: 3px solid var(--rule);
+  padding: 0.6rem 0.85rem;
+  margin: 0;
+}
+
+.turn-answer {
+  padding: 1rem 1.1rem;
+  background: #fbfcfd;
+}
+
+.turn-answer::before {
+  content: "Claude";
+  display: block;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 0.35rem;
+  font-weight: 700;
+}
+
+.turn-answer strong {
+  color: var(--ink);
+}
