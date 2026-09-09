@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "census-mcp": {
+      "type": "http",
+      "url": "https://census-mcp.vercel.app/mcp"
+    }
+  }
+}
