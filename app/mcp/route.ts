@@ -7,6 +7,10 @@ import {
   resolveGeographyConfig,
   resolveGeographyHandler,
 } from "../../lib/tools/resolve-geography";
+import {
+  searchColumnsConfig,
+  searchColumnsHandler,
+} from "../../lib/tools/search-columns";
 
 const handler = createMcpHandler((server) => {
   server.registerTool("list_vintages", listVintagesConfig, listVintagesHandler);
@@ -14,6 +18,11 @@ const handler = createMcpHandler((server) => {
     "resolve_geography",
     resolveGeographyConfig,
     resolveGeographyHandler
+  );
+  server.registerTool(
+    "search_columns",
+    searchColumnsConfig,
+    searchColumnsHandler
   );
 });
 
