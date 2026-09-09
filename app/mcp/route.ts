@@ -11,6 +11,7 @@ import {
   searchColumnsConfig,
   searchColumnsHandler,
 } from "../../lib/tools/search-columns";
+import { getDataConfig, getDataHandler } from "../../lib/tools/get-data";
 
 const handler = createMcpHandler((server) => {
   server.registerTool("list_vintages", listVintagesConfig, listVintagesHandler);
@@ -24,6 +25,7 @@ const handler = createMcpHandler((server) => {
     searchColumnsConfig,
     searchColumnsHandler
   );
+  server.registerTool("get_data", getDataConfig, getDataHandler);
 });
 
 export { handler as GET, handler as POST };
