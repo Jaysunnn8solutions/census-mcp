@@ -1,4 +1,4 @@
-import type { Vintage } from "./types";
+import type { Vintage, CensusRawResponse } from "./types";
 
 const CATALOG_URL = "https://api.census.gov/data.json";
 const FETCH_TIMEOUT_MS = 10_000;
@@ -51,4 +51,43 @@ export async function fetchVintages(dataset: Dataset): Promise<Vintage[]> {
     )
     .map((d) => d.c_vintage)
     .sort((a, b) => a - b);
+}
+
+function apiKey(): string {
+  const key = process.env.CENSUS_API_KEY;
+  if (!key) {
+    throw new Error(
+      "CENSUS_API_KEY is not configured. The server operator must set this environment variable."
+    );
+  }
+  return key;
+}
+
+/**
+ * Query a Census data endpoint. Returns raw rows: row 0 is headers.
+ * The API answers errors with HTTP 200 and an HTML page, so we detect that
+ * explicitly rather than letting JSON.parse throw something unreadable.
+ */
+export async function fetchCensusRows(
+  vintage: Vintage,
+  dataset: Dataset,
+  params: Record<string, string>
+): Promise<CensusRawResponse> {
+  const url = new URL(baseUrl(vintage, dataset));
+  for (const [k, v] of Object.entries(params)) {
+    url.searchParams.set(k, v);
+  }
+  url.searchParams.set("key", apiKey());
+
+  const res = await fetch(url, { signal: AbortSignal.timeout(FETCH_TIMEOUT_MS) });
+  const text = await res.text();
+
+  if (text.trimStart().startsWith("<")) {
+    const title = text.match(/<title>(.*?)<\/title>/)?.[1] ?? "unknown error";
+    throw new Error(`Census API error: ${title}`);
+  }
+  if (!res.ok) {
+    throw new Error(`Census API returned HTTP ${res.status}`);
+  }
+  return JSON.parse(text) as CensusRawResponse;
 }
