@@ -1,0 +1,291 @@
+:root {
+  --navy: #14213d;
+  --navy-light: #1f2f52;
+  --rule: #d4d7dd;
+  --rule-light: #e8eaee;
+  --ink: #1a1d23;
+  --ink-muted: #565c66;
+  --paper: #ffffff;
+  --paper-alt: #f7f8fa;
+  --accent: #9b2226;
+  --link: #1a4c8b;
+  --mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+  --sans: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--sans);
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---- Masthead ---------------------------------------------------------- */
+
+.masthead {
+  background: var(--navy);
+  color: #fff;
+  border-bottom: 4px solid var(--accent);
+}
+
+.masthead-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.masthead-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.masthead-sub {
+  font-size: 0.8rem;
+  color: #b9c0cf;
+  letter-spacing: 0.03em;
+}
+
+/* ---- Hero -------------------------------------------------------------- */
+
+.hero {
+  background: var(--paper-alt);
+  border-bottom: 1px solid var(--rule);
+}
+
+.hero-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 3.5rem 1.5rem 3rem;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 4.5vw, 2.9rem);
+  line-height: 1.15;
+  margin: 0 0 1rem;
+  letter-spacing: -0.02em;
+  max-width: 20ch;
+}
+
+.hero p {
+  font-size: 1.15rem;
+  color: var(--ink-muted);
+  max-width: 60ch;
+  margin: 0;
+}
+
+.stat-row {
+  display: flex;
+  gap: 2.5rem;
+  margin-top: 2.25rem;
+  flex-wrap: wrap;
+}
+
+.stat-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--navy);
+  line-height: 1.1;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--ink-muted);
+  margin-top: 0.2rem;
+}
+
+/* ---- Sections ---------------------------------------------------------- */
+
+section {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+  border-bottom: 1px solid var(--rule-light);
+}
+
+section:last-of-type {
+  border-bottom: none;
+}
+
+.eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 0.5rem;
+}
+
+section h2 {
+  font-size: 1.5rem;
+  margin: 0 0 1.25rem;
+  letter-spacing: -0.01em;
+}
+
+section p {
+  max-width: 68ch;
+  color: var(--ink-muted);
+}
+
+/* ---- Code / URL -------------------------------------------------------- */
+
+.url-box {
+  font-family: var(--mono);
+  font-size: 0.95rem;
+  background: var(--navy);
+  color: #e8ecf5;
+  padding: 0.9rem 1.1rem;
+  border-radius: 3px;
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+
+code {
+  font-family: var(--mono);
+  font-size: 0.88em;
+  background: var(--paper-alt);
+  border: 1px solid var(--rule-light);
+  padding: 0.1rem 0.35rem;
+  border-radius: 3px;
+}
+
+/* ---- Steps ------------------------------------------------------------- */
+
+.steps {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0;
+  counter-reset: step;
+}
+
+.steps li {
+  counter-increment: step;
+  position: relative;
+  padding-left: 2.75rem;
+  margin-bottom: 1.1rem;
+  color: var(--ink-muted);
+  max-width: 66ch;
+}
+
+.steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1.75rem;
+  height: 1.75rem;
+  background: var(--navy);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- Tool table -------------------------------------------------------- */
+
+.tools {
+  border-top: 2px solid var(--navy);
+  margin-top: 1.5rem;
+}
+
+.tool {
+  display: grid;
+  grid-template-columns: 15rem 1fr;
+  gap: 1.5rem;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--rule-light);
+}
+
+.tool-name {
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  color: var(--navy);
+  font-weight: 600;
+}
+
+.tool-desc {
+  color: var(--ink-muted);
+  font-size: 0.95rem;
+}
+
+@media (max-width: 640px) {
+  .tool {
+    grid-template-columns: 1fr;
+    gap: 0.3rem;
+  }
+}
+
+/* ---- Notes ------------------------------------------------------------- */
+
+.notes {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0;
+}
+
+.notes li {
+  border-left: 3px solid var(--rule);
+  padding: 0.15rem 0 0.15rem 1.1rem;
+  margin-bottom: 1.1rem;
+  color: var(--ink-muted);
+  max-width: 68ch;
+}
+
+.notes strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* ---- Footer ------------------------------------------------------------ */
+
+footer {
+  background: var(--navy);
+  color: #b9c0cf;
+  font-size: 0.85rem;
+}
+
+.footer-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+a {
+  color: var(--link);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+footer a {
+  color: #e8ecf5;
+}
